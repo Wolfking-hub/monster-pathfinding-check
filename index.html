@@ -312,6 +312,48 @@
   .card-controls { flex: 0 0 340px; }
   .card-spare    { flex: 1 1 auto; }
 
+  /* ---- 说明卡片 ---- */
+  .notes {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .notes .lead {
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .notes .hint {
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .notes ul {
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+  }
+  .notes li {
+    position: relative;
+    padding-left: 16px;
+    color: var(--text);
+  }
+  .notes li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+  /* 红 / 蓝 上色，和游戏里箭头对应 */
+  .notes .red  { color: #e53935; font-weight: 600; }
+  .notes .blue { color: #1e88e5; font-weight: 600; }
+
+  .notes .updated {
+    font-size: 11.5px;
+    color: var(--text-dim);
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+
   .card h3 {
     font-size: 12px;
     font-weight: 600;
@@ -467,18 +509,6 @@
   .switch.on { background: var(--accent); }
   .switch.on::after { transform: translateX(18px); }
 
-  .spare-hint {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    line-height: 1.9;
-  }
-  .spare-hint code {
-    background: var(--panel-2);
-    padding: 1px 6px;
-    border-radius: 5px;
-    font-size: 11.5px;
-  }
-
   /* ---- 图标按钮（主题切换） ---- */
   .icon-btn {
     font: inherit;
@@ -592,10 +622,19 @@
       </div>
 
       <div class="card card-spare">
-        <h3>待用</h3>
-        <div class="spare-hint">
-          这块先空着。<br>
-          后面可以放图例、缩略图、格子的详细数据（<code>ground</code> / <code>base</code> / <code>arrows</code>）。
+        <h3>说明</h3>
+        <div class="notes">
+          <div class="lead">怪物出生后行动至少 1 回合。</div>
+          <div class="hint">当它刚好停在路口时，可以查这张图。</div>
+
+          <ul>
+            <li>停在这里必定有两个朝向</li>
+            <li>有<span class="red">红</span>走<span class="red">红</span></li>
+            <li>无红走<span class="blue">蓝</span></li>
+            <li><span class="red">红</span><span class="blue">蓝</span>都有，优先走<span class="red">红</span></li>
+          </ul>
+
+          <div class="updated">最后更新：2026-10-03</div>
         </div>
       </div>
     </div>
