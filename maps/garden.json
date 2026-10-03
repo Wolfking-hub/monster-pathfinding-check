@@ -1,0 +1,838 @@
+{
+  "cols": 10,
+  "rows": 11,
+  "cells": [
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "p3",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-yellow",
+            "toR": 1,
+            "toC": 4
+          }
+        ]
+      },
+      {
+        "ground": "event",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "disease",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "shop",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "card_reward",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "monster_assault",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "windfall",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "disaster",
+        "base": 60,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "heal",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "chip_shop",
+        "base": 60,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "shop",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "monster",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "windfall",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-red",
+            "toR": 3,
+            "toC": 5
+          },
+          {
+            "color": "arrow-blue",
+            "toR": 3,
+            "toC": 3
+          }
+        ]
+      },
+      {
+        "ground": "monster_assault",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "safeguard",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "disease",
+        "base": 60,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "event",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "card_reward",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "disaster",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-red",
+            "toR": 5,
+            "toC": 7
+          },
+          {
+            "color": "arrow-blue",
+            "toR": 4,
+            "toC": 6
+          }
+        ]
+      },
+      {
+        "ground": "monster",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "p4",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-yellow",
+            "toR": 4,
+            "toC": 8
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "heal",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": [
+          {
+            "color": "arrow-green",
+            "toR": 4,
+            "toC": 3
+          }
+        ]
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": [
+          {
+            "color": "arrow-green",
+            "toR": 6,
+            "toC": 6
+          }
+        ]
+      },
+      {
+        "ground": "heal",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "p1",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-yellow",
+            "toR": 6,
+            "toC": 1
+          }
+        ]
+      },
+      {
+        "ground": "monster",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "disaster",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-red",
+            "toR": 5,
+            "toC": 2
+          },
+          {
+            "color": "arrow-blue",
+            "toR": 6,
+            "toC": 3
+          }
+        ]
+      },
+      {
+        "ground": "card_reward",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "event",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "disease",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "safeguard",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "monster_assault",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "windfall",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-red",
+            "toR": 7,
+            "toC": 4
+          },
+          {
+            "color": "arrow-blue",
+            "toR": 7,
+            "toC": 6
+          }
+        ]
+      },
+      {
+        "ground": "monster",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "shop",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "chip_shop",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "heal",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "disaster",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "windfall",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "monster_assault",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "card_reward",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ],
+    [
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "shop",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "disease",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "event",
+        "base": 60,
+        "arrows": []
+      },
+      {
+        "ground": "p2",
+        "base": 60,
+        "arrows": [
+          {
+            "color": "arrow-yellow",
+            "toR": 9,
+            "toC": 5
+          }
+        ]
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      },
+      {
+        "ground": "empty",
+        "base": null,
+        "arrows": []
+      }
+    ]
+  ],
+  "groundOverflow": {
+    "0,5": {
+      "ground": "event",
+      "base": 60
+    },
+    "0,6": {
+      "ground": "disease",
+      "base": 60
+    },
+    "0,7": {
+      "ground": "shop",
+      "base": 60
+    },
+    "1,7": {
+      "ground": "monster_assault",
+      "base": 60
+    },
+    "1,8": {
+      "ground": "windfall",
+      "base": 60
+    },
+    "1,9": {
+      "ground": "disaster",
+      "base": 60
+    },
+    "2,9": {
+      "ground": "chip_shop",
+      "base": 60
+    },
+    "3,9": {
+      "ground": "disease",
+      "base": 60
+    },
+    "4,8": {
+      "ground": "monster",
+      "base": 60
+    },
+    "4,7": {
+      "ground": "disaster",
+      "base": 60
+    },
+    "5,7": {
+      "ground": "heal",
+      "base": 60
+    },
+    "6,7": {
+      "ground": "event",
+      "base": 60
+    },
+    "7,7": {
+      "ground": "shop",
+      "base": 60
+    },
+    "7,6": {
+      "ground": "monster",
+      "base": 60
+    },
+    "7,5": {
+      "ground": "windfall",
+      "base": 60
+    },
+    "7,4": {
+      "ground": "monster_assault",
+      "base": 60
+    },
+    "7,3": {
+      "ground": "safeguard",
+      "base": 60
+    },
+    "3,6": {
+      "ground": "safeguard",
+      "base": 60
+    },
+    "4,6": {
+      "ground": "card_reward",
+      "base": 60
+    },
+    "3,5": {
+      "ground": "monster_assault",
+      "base": 60
+    },
+    "3,4": {
+      "ground": "windfall",
+      "base": 60
+    },
+    "3,3": {
+      "ground": "monster",
+      "base": 60
+    },
+    "3,2": {
+      "ground": "shop",
+      "base": 60
+    },
+    "4,2": {
+      "ground": "event",
+      "base": 60
+    },
+    "5,2": {
+      "ground": "heal",
+      "base": 60
+    },
+    "6,2": {
+      "ground": "disaster",
+      "base": 60
+    },
+    "6,3": {
+      "ground": "card_reward",
+      "base": 60
+    },
+    "2,4": {
+      "ground": "heal",
+      "base": 60
+    },
+    "1,4": {
+      "ground": "card_reward",
+      "base": 60
+    },
+    "8,5": {
+      "ground": "heal",
+      "base": 60
+    },
+    "9,5": {
+      "ground": "card_reward",
+      "base": 60
+    },
+    "10,4": {
+      "ground": "event",
+      "base": 60
+    },
+    "10,3": {
+      "ground": "disease",
+      "base": 60
+    },
+    "10,2": {
+      "ground": "shop",
+      "base": 60
+    },
+    "9,2": {
+      "ground": "monster_assault",
+      "base": 60
+    },
+    "9,1": {
+      "ground": "windfall",
+      "base": 60
+    },
+    "9,0": {
+      "ground": "disaster",
+      "base": 60
+    },
+    "8,0": {
+      "ground": "chip_shop",
+      "base": 60
+    },
+    "7,0": {
+      "ground": "disease",
+      "base": 60
+    },
+    "6,1": {
+      "ground": "monster",
+      "base": 60
+    },
+    "6,0": {
+      "ground": "p1",
+      "base": 60
+    },
+    "10,5": {
+      "ground": "p2",
+      "base": 60
+    },
+    "0,4": {
+      "ground": "p3",
+      "base": 60
+    },
+    "4,9": {
+      "ground": "p4",
+      "base": 60
+    }
+  },
+  "baseLines": [],
+  "midCells": {}
+}

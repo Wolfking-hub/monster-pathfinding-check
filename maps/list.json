@@ -1,0 +1,28 @@
+{
+  "maps": [
+    { "id": "ghostly_alley", "name": "幽魂暗巷", "group": "normal" },
+    { "id": "dragon-palace", "name": "龙宫游乐园", "group": "normal" },
+    { "id": "dreamer", "name": "星趴·梦想号", "group": "normal" },
+    { "id": "watertown", "name": "水乡古镇", "group": "normal" },
+    { "id": "garden", "name": "园林中庭", "group": "normal" },
+    {
+      "id": "magic-academy (outside)",
+      "name": "魔法学院",
+      "group": "normal",
+      "variants": {
+        "label": "内部形态",
+        "default": "magic-academy (outside)",
+        "items": [
+          { "id": "magic-academy (outside)", "name": "外部" },
+          { "id": "magic-academy (Internal-guard)", "name": "卫兵" },
+          { "id": "magic-academy (Internal-teapot)", "name": "茶壶" }
+        ]
+      }
+    },
+    { "id": "soul", "name": "御魂庆典", "group": "normal" },
+    { "id": "library", "name": "异变图书馆", "group": "limited" },
+    { "id": "sports-meet (open-auditions)", "name": "海选赛运动场", "group": "limited" },
+    { "id": "sports-meet (eliminate)", "name": "淘汰赛运动场", "group": "limited" },
+    { "id": "sports-meet (final)", "name": "决赛大赛场", "group": "limited" }
+  ]
+}
