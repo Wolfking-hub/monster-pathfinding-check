@@ -264,8 +264,7 @@
     box-shadow: var(--shadow);
     /* 淡出：切图前加 .is-fading。时长要和 JS 里的 FADE_OUT_MS 一致 */
     transition: opacity 0.09s ease, transform 0.09s ease;
-  }
-  /* 切图淡出 */
+  }  /* 切图淡出 */
   canvas.is-fading {
     opacity: 0;
     transform: scale(0.99);
@@ -1006,6 +1005,12 @@ function bindControls() {
   // 导出 PNG：直接按当前显示设置导出，不再问一次
   document.getElementById('exportBtn').onclick = exportPNG;
 
+  // 手机：点地图直接弹高清预览，方便长按保存
+  // 桌面：不绑（免得误点弹窗），桌面用「导出 PNG」下载
+  document.getElementById('map').onclick = () => {
+    if (isMobile()) openPreview();
+  };
+
   // 预览层关闭
   const lb = document.getElementById('lightbox');
   document.getElementById('lightboxClose').onclick = () => lb.classList.remove('show');
@@ -1635,10 +1640,7 @@ function exportPNG() {
      改成弹出预览让用户长按保存（这是唯一稳的方式）。
      桌面：还是直接下载，行为不变。 */
   if (isMobile()) {
-    const dataUrl = canvas.toDataURL('image/png');
-    const img = document.getElementById('lightboxImg');
-    img.src = dataUrl;
-    document.getElementById('lightbox').classList.add('show');
+    openPreview();
     return;
   }
 
@@ -1646,6 +1648,18 @@ function exportPNG() {
   a.href = canvas.toDataURL('image/png');
   a.download = fileName;
   a.click();
+}
+
+/* 打开高清预览层（手机用）。
+   点地图、或点「导出 PNG」，走的都是这里 —— 给的都是 48px 原尺寸高清图。 */
+function openPreview() {
+  if (!currentData) return;
+  const canvas = buildExportCanvas();
+  if (!canvas) return;
+
+  const img = document.getElementById('lightboxImg');
+  img.src = canvas.toDataURL('image/png');
+  document.getElementById('lightbox').classList.add('show');
 }
 
 /* 是不是手机 / 窄屏 */
