@@ -834,8 +834,8 @@
         </div>
 
         <div class="ctrl-row">
-          <span class="label">箭头半透明</span>
-          <div class="switch" id="alphaSwitch"></div>
+          <span class="label">显示箭头</span>
+          <div class="switch on" id="arrowSwitch"></div>
         </div>
 
         <!-- 常显分隔线：以后的切换按钮都从这条线下面滑出来 -->
@@ -940,7 +940,7 @@ const sizeCache = {};
 
 /* 显示选项：切图时保持，不重置 */
 let withGap = false;        // 默认无网格（格子紧贴，白底）
-let arrowAlphaOn = false;   // 默认箭头不透明（实心）
+let showArrows = true;      // 默认显示箭头；关掉则屏幕和导出都没有箭头
 
 /* ============ 主题 ============ */
 function applyTheme(t) {
@@ -994,11 +994,11 @@ function bindControls() {
   const seg = document.getElementById('gridSeg');
   seg.onclick = () => setGrid(withGap ? 'off' : 'on');
 
-  // 箭头透明度
-  const sw = document.getElementById('alphaSwitch');
+  // 显示箭头：关掉则整层不画（屏幕和导出都没有）
+  const sw = document.getElementById('arrowSwitch');
   sw.onclick = () => {
-    arrowAlphaOn = !arrowAlphaOn;
-    sw.classList.toggle('on', arrowAlphaOn);
+    showArrows = !showArrows;
+    sw.classList.toggle('on', showArrows);
     if (currentData) renderMap(currentData);
   };
 
@@ -1817,16 +1817,17 @@ function baseLineMidCells(data, cellSize, step) {
   return out;
 }
 
-/* ============ 箭头 ============ */
+/* ============ 箭头 ============
+   showArrows 关掉时整层不画（屏幕和导出都受影响）。 */
 function drawArrows(ctx, data, cellSize, gap) {
+  if (!showArrows) return;
+
   const step = cellSize + gap;
   const { lineWidth, headLen, headWidth } = ARROW_STYLE;
   const scale = cellSize / BASE_CELL_SIZE;
   const lw = lineWidth * scale;
   const hl = headLen * scale;
   const hw = headWidth * scale;
-
-  const alpha = arrowAlphaOn ? 0.85 : 1;
 
   for (let r = 0; r < data.rows; r++) {
     for (let c = 0; c < data.cols; c++) {
@@ -1853,7 +1854,7 @@ function drawArrows(ctx, data, cellSize, gap) {
         const lineEndX = tx - ux * (hl * 0.5);
         const lineEndY = ty - uy * (hl * 0.5);
 
-        ctx.globalAlpha = alpha;
+        ctx.globalAlpha = 1;
         ctx.strokeStyle = color;
         ctx.lineWidth = lw;
         ctx.lineCap = 'round';
