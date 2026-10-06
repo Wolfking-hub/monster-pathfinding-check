@@ -55,7 +55,14 @@
     -webkit-touch-callout: default;
   }
 
-  html, body { height: 100%; margin: 0; }
+  html, body {
+    height: 100%;
+    margin: 0;
+    /* 禁止横向滑动触发浏览器的前进/后退手势
+       （那个提示条一出现就挤压高度，地图会跟着重新缩放） */
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+  }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei",
@@ -962,8 +969,8 @@ function applyTheme(t) {
     btn.title = dark ? '切换到浅色' : '切换到深色';
   }
   try { localStorage.setItem('p2-theme', dark ? 'dark' : 'light'); } catch (e) {}
-  // 画布底色跟主题走
-  if (currentData) renderMap(currentData);
+  // 画布底色跟主题走。只重画，不播换图动画
+  if (currentData) repaintMap(currentData);
 }
 function initTheme() {
   let saved = null;
@@ -1009,7 +1016,7 @@ function bindControls() {
   sw.onclick = () => {
     showArrows = !showArrows;
     sw.classList.toggle('on', showArrows);
-    if (currentData) renderMap(currentData);
+    if (currentData) repaintMap(currentData);
   };
 
   // 导出 PNG：直接按当前显示设置导出，不再问一次
@@ -1044,7 +1051,7 @@ function setGrid(mode) {
     seg.querySelectorAll('button').forEach(b =>
       b.classList.toggle('on', b.dataset.grid === mode));
   }
-  if (currentData) renderMap(currentData);
+  if (currentData) repaintMap(currentData);
 }
 
 /* ============ 读取地图列表 ============ */
@@ -1508,14 +1515,19 @@ function renderMap(data) {
 
   paintMap(canvas, data);
 
-  // 监听窗口大小变化，重新渲染
+  // 监听窗口大小变化。
+  // 这里只重画，不播淡入淡出 —— 手机上地址栏收缩、手势条出现都会触发 resize，
+  // 如果每次都走动画，地图会反复闪。换图的动画在 renderMap 里，不受影响。
   if (renderMap._resizeHandler) {
     window.removeEventListener('resize', renderMap._resizeHandler);
   }
   renderMap._resizeHandler = () => {
     clearTimeout(renderMap._resizeTimer);
     renderMap._resizeTimer = setTimeout(() => {
-      if (currentData) renderMap(currentData);
+      const cv = document.getElementById('map');
+      if (currentData && cv && !cv.classList.contains('hidden')) {
+        paintMap(cv, currentData);      // 纯重画，无动画
+      }
     }, 150);
   };
   window.addEventListener('resize', renderMap._resizeHandler);
