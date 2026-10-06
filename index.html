@@ -1062,30 +1062,49 @@ async function selectMap(id) {
   renderVariants(entry, id);
 
   /* 顺序很关键（否则会闪白）：
-     1. 旧图原地不动，后台把数据和图标全加载好
-     2. 加载完成后，旧图才淡出（约 90ms）
-     3. 立刻画新图 + 淡入
-     空档只有那 90ms，不会出现「加载多久就白多久」。 */
+     1. 旧图原地不动，先把 JSON 拿下来
+     2. JSON 到手就让旧图淡出（约 90ms）
+     3. 立刻画新图（底板/斜带/浮动格/箭头都在，图标先空着）
+     4. 图标一个个到货，每到一张就补画
+     ——这样「选图后要转很久」变成「立刻有画面，图标渐次补齐」。 */
   try {
     const res = await fetch(MAPS_DIR + encodeURIComponent(id) + '.json');
     if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + id + '.json');
     const data = await res.json();
-    await preloadIcons(data);
 
     // 数据齐了，这时才动画面
     const hadCanvas = !document.getElementById('map').classList.contains('hidden');
     if (!isSameMap && hadCanvas) await fadeOutCanvas();
 
     currentData = data;
-    renderMap(data);                 // 画 + 淡入
+    renderMap(data);                 // 先画一遍（图标可能还没到）
     updateTopbar(data);
     document.getElementById('exportBtn').disabled = false;
     sizeCache[id] = data.cols + '×' + data.rows;
     renderSidebar();
+
+    // 图标到一张补画一次。同一帧内到多张只重画一次，避免抖动。
+    let pending = false;
+    preloadIcons(data, () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => {
+        pending = false;
+        // 期间如果用户又切了图，就丢弃这次补画
+        if (currentData === data) repaintMap(data);
+      });
+    });
   } catch (err) {
     showPlaceholder('读取地图失败', err.message);
     document.getElementById('exportBtn').disabled = true;
   }
+}
+
+/* 只重画画布内容，不动淡入淡出、不重绑 resize */
+function repaintMap(data) {
+  const canvas = document.getElementById('map');
+  if (!canvas || canvas.classList.contains('hidden')) return;
+  paintMap(canvas, data);
 }
 
 /* 旧图淡出：等 CSS 过渡走完再继续 */
@@ -1170,8 +1189,10 @@ function showPlaceholder(title, detail, spinner) {
 }
 
 /* ============ 预加载图标 ============ */
-function preloadIcons(data) {
-  const promises = [];
+/* 预加载图标。
+   不阻塞渲染：每张图到货就回调一次，让调用方可以「画到哪算哪」。
+   返回 { started, total }。 */
+function preloadIcons(data, onEach) {
   const set = new Set();
 
   for (let r = 0; r < data.rows; r++) {
@@ -1186,31 +1207,59 @@ function preloadIcons(data) {
     if (g && g !== 'empty') set.add(g);
   });
 
+  let started = 0;
   set.forEach(type => {
-    if (iconCache[type]) return;
     const file = ICON_MAP[type];
     if (!file) return;
+    if (iconCache[type]) return;         // 已经有缓存
+
+    started++;
     const img = new Image();
-    const p = new Promise(resolve => {
-      img.onload = () => { iconCache[type] = img; resolve(); };
-      img.onerror = () => { resolve(); };
-    });
+    img.onload = () => {
+      iconCache[type] = img;
+      if (onEach) onEach(type);
+    };
+    img.onerror = () => { /* 加载失败就不画，不阻塞 */ };
     img.src = ICONS_DIR + file + ICON_EXT;
-    promises.push(p);
   });
 
-  return Promise.all(promises);
+  return { started: started, total: set.size };
 }
 
-/* ============ 渲染地图 ============
-   绘制顺序（和 P1 的 exportPNG 一致，不能调换）：
-   背景 → 逐格底板 → 斜带 → 浮动格 → 逐格图标 → 箭头
-   ⚠️ 曾经把图标画在斜带之前，斜带会把所有图标盖住。 */
+/* ============ 渲染地图（外壳：尺寸、淡入、resize） ============ */
 function renderMap(data) {
   const canvas = document.getElementById('map');
   document.getElementById('placeholder').classList.add('hidden');
   canvas.classList.remove('hidden');
 
+  paintMap(canvas, data);
+
+  // 监听窗口大小变化，重新渲染
+  if (renderMap._resizeHandler) {
+    window.removeEventListener('resize', renderMap._resizeHandler);
+  }
+  renderMap._resizeHandler = () => {
+    clearTimeout(renderMap._resizeTimer);
+    renderMap._resizeTimer = setTimeout(() => {
+      if (currentData) renderMap(currentData);
+    }, 150);
+  };
+  window.addEventListener('resize', renderMap._resizeHandler);
+
+  // 新图淡入：先跳到起始态，下一帧再放回去让它过渡
+  canvas.classList.remove('is-fadein', 'is-fading');
+  canvas.classList.add('is-entering');
+  void canvas.offsetWidth;              // 强制回流，让起始态生效
+  canvas.classList.remove('is-entering');
+  canvas.classList.add('is-fadein');
+}
+
+/* ============ 真正的绘制 ============
+   绘制顺序（和 P1 的 exportPNG 一致，不能调换）：
+   背景 → 逐格底板 → 斜带 → 浮动格 → 逐格图标 → 箭头
+   ⚠️ 曾经把图标画在斜带之前，斜带会把所有图标盖住。
+   这个函数是纯绘制，可以被反复调用（图标到货时补画）。 */
+function paintMap(canvas, data) {
   const ctx = canvas.getContext('2d');
 
   const stage = document.getElementById('stage');
@@ -1232,10 +1281,14 @@ function renderMap(data) {
   const totalH = rows * cellSize + (rows - 1) * gap;
 
   const dpr = window.devicePixelRatio || 1;
-  canvas.width = totalW * dpr;
-  canvas.height = totalH * dpr;
-  canvas.style.width = totalW + 'px';
-  canvas.style.height = totalH + 'px';
+  // 尺寸没变就别重置，否则每次补画都清一次画布会闪
+  const wantW = totalW * dpr, wantH = totalH * dpr;
+  if (canvas.width !== wantW || canvas.height !== wantH) {
+    canvas.width = wantW;
+    canvas.height = wantH;
+    canvas.style.width = totalW + 'px';
+    canvas.style.height = totalH + 'px';
+  }
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
   /* 坐标换算：有网格用 step（含 1px 缝），无网格用 cellSize。
@@ -1302,24 +1355,6 @@ function renderMap(data) {
 
   // ---- 5. 箭头 ----
   drawArrows(ctx, data, cellSize, gap);
-
-  if (renderMap._resizeHandler) {
-    window.removeEventListener('resize', renderMap._resizeHandler);
-  }
-  renderMap._resizeHandler = () => {
-    clearTimeout(renderMap._resizeTimer);
-    renderMap._resizeTimer = setTimeout(() => {
-      if (currentData) renderMap(currentData);
-    }, 150);
-  };
-  window.addEventListener('resize', renderMap._resizeHandler);
-
-  // 新图淡入：先跳到起始态，下一帧再放回去让它过渡
-  canvas.classList.remove('is-fadein', 'is-fading');
-  canvas.classList.add('is-entering');
-  void canvas.offsetWidth;              // 强制回流，让起始态生效
-  canvas.classList.remove('is-entering');
-  canvas.classList.add('is-fadein');
 }
 
 /* ============ 导出 PNG ============
