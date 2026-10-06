@@ -48,6 +48,13 @@
 
   * { box-sizing: border-box; }
 
+  /* 去掉移动端点击时系统给的蓝色高亮方块（太突兀）。
+     按压反馈改用各元素自己的 :active 样式。 */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: default;
+  }
+
   html, body { height: 100%; margin: 0; }
 
   body {
@@ -139,6 +146,7 @@
     user-select: none;
   }
   .map-item:hover { background: var(--panel-2); color: var(--text); }
+  .map-item:active { background: var(--line); }
   .map-item.active {
     background: var(--accent-bg);
     color: var(--accent);
@@ -168,6 +176,7 @@
     transition: background 0.12s;
   }
   .sidebar-foot:hover { background: var(--panel-2); }
+  .sidebar-foot:active { background: var(--line); }
 
   /* ================= 主区域 ================= */
   .main {
@@ -425,6 +434,7 @@
     background: var(--panel-2);
     color: var(--text);
   }
+  .variant-btns button:active { background: var(--line); }
   .variant-btns button.on {
     background: var(--accent-bg);
     border-color: var(--accent);
