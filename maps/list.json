@@ -20,6 +20,7 @@
       }
     },
     { "id": "soul", "name": "御魂庆典", "group": "normal" },
+    { "id": "Forest", "name": "森林幻境", "group": "normal" },
     { "id": "library", "name": "异变图书馆", "group": "limited" },
     { "id": "sports-meet (open-auditions)", "name": "海选赛运动场", "group": "limited" },
     { "id": "sports-meet (eliminate)", "name": "淘汰赛运动场", "group": "limited" },
